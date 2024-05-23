@@ -16,7 +16,4 @@ public class OrderDTO {
     @NotBlank(message = "수량을 정확히 입력해주세요")
     int count;
 
-    public Order convertToEntity() {
-        return new Order(productId, count);
-    }
 }

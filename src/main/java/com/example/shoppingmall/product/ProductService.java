@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor // 필드로 생성자 코드 구현
 public class ProductService {
     ProductRepository productRepository;
-
+    ProductJPARepository productJPARepository;
     public Product registerProduct(Product product) {
         System.out.println(
                 "/products : service - " + product.getName());
@@ -19,6 +19,10 @@ public class ProductService {
 
     public Product findProduct(int id) {
         return productRepository.findProduct(id);
+    }
+
+    public List<Product> findProducts(){
+        return productJPARepository.findAll();
     }
 
     public List<Product> findProducts(int limit, int currentPage) {

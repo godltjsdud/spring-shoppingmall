@@ -5,20 +5,19 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class MemberService {
 
-    MemberRepository memberRepository;
+    MemberJPARepository memberRepository;
 
     @Transactional
     public String join(Member member) {
         memberRepository.save(member);
 
-        String userId = memberRepository
-                .findByUserId(member.getUserId())
-                .getUserId();
+        String userId = memberRepository.findByUserId(member.getUserId()).get().getUserId();
 
         System.out.println("예외처리를 해도 트랜잭션은 마무리 될까요?");
 
@@ -26,10 +25,10 @@ public class MemberService {
     }
 
     public boolean checkDuplicateId(String userId) {
-        Member existMember
+        Optional<Member> existMember
                 = memberRepository.findByUserId(userId);
 
-        if (existMember == null)
+        if (existMember.isEmpty())
             return false;
         else
             return true;

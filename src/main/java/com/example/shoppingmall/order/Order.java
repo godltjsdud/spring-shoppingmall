@@ -6,7 +6,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
 //@RequiredArgsConstructor
 public class Order {

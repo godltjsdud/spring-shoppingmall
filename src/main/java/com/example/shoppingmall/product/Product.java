@@ -1,6 +1,8 @@
 package com.example.shoppingmall.product;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,10 +12,18 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 public class Product {
+    @Id
     private int id;
+
+    @NotBlank(message = "상품 이름을 입력해주세요.")
     private String name;
+
+    @NotBlank(message = "상품 가격을 입력해주세요")
     private int price;
+
     private String description;
+
+    @NotBlank(message =  "카테고리를 입력해주세요")
     private int categoryId;
 
     // getter, setter

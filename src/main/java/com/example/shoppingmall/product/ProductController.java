@@ -71,10 +71,14 @@ public class ProductController {
 
         // TODO null 체크는 어디서 해야할까?
         if(categoryId == null) {
-            List<Product> products = productService.findProducts(limit, currentPage);
+//            List<Product> products = productService.findProducts(limit, currentPage);
+            List<Product> products = productService.findProducts();
+            System.out.println(products.get(0));
             return new ResponseEntity<>(products, HttpStatus.OK);
         } else {
-            List<Product> products = productService.findProducts(limit, currentPage, categoryId);
+//            List<Product> products = productService.findProducts(limit, currentPage, categoryId);
+            List<Product> products = productService.findProducts();
+            System.out.println(products.get(0));
             return new ResponseEntity<>(products, HttpStatus.OK);
         }
     }
@@ -106,4 +110,6 @@ public class ProductController {
         productService.deleteProducts(productIds);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 }
