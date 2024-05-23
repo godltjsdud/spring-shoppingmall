@@ -82,4 +82,21 @@ public class MemberController {
 //
 //        return error(errorMessages, HttpStatus.BAD_REQUEST);
 //    }
+
+    @PostMapping("/login")
+    public ApiUtils.ApiResult login(@RequestBody Map<String,String> user){
+
+        String userId = user.get("userId");
+        String password = user.get("pw");
+
+        if (userId == null || password == null) {
+            return error("Missing userId or password", HttpStatus.BAD_REQUEST);
+        }
+
+        if (memberService.authenticate(userId, password)) {
+            return success(userId);
+        } else {
+            return error("Invalid userId or password", HttpStatus.NOT_FOUND);
+        }
+    }
 }

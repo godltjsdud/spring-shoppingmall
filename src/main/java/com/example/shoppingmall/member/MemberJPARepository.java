@@ -19,6 +19,6 @@ public interface MemberJPARepository
 
     Optional<Member> findByUserId(String userId);
 
-    List<Member> findByUserIdAndPw(String userId, String pw);
+    Optional<Member> findByUserIdAndPw(String userId, String pw);
 
 }

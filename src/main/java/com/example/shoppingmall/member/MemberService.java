@@ -34,4 +34,17 @@ public class MemberService {
             return true;
     }
 
+    public boolean authenticate(String userId, String pw) {
+        Optional<Member> existMember
+                = memberRepository.findByUserIdAndPw(userId,pw);
+
+//        Optional<Member> existMember = memberRepository.findByUserId(userId);
+        if (!existMember.isEmpty()) {
+            Member member = existMember.get();
+            return true;
+        }
+
+        return false;
+
+    }
 }
