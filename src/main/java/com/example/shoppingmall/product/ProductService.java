@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor // 필드로 생성자 코드 구현
@@ -19,8 +20,10 @@ public class ProductService {
     }
 
     public Product findProduct(int id) {
-        return productRepository.findProduct(id);
+//        return productRepository.findProduct(id);
+        return productJPARepository.findById(id).get();
     }
+
 
     public List<Product> findProducts(){
         return productJPARepository.findAll();

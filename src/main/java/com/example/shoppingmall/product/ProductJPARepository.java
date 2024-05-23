@@ -10,4 +10,6 @@ public interface ProductJPARepository extends JpaRepository<Product, Integer> {
 
     <S extends Product> S save(S entity);
     List<Product> findAll() ;
+    @Override
+    Optional<Product> findById(Integer integer);
 }
