@@ -15,16 +15,9 @@ import lombok.Setter;
 public class Product {
     @Id
     private int id;
-
-    @NotBlank(message = "상품 이름을 입력해주세요.")
     private String name;
-
-    @NotNull(message = "상품 가격을 입력해주세요")
     private int price;
-
     private String description;
-
-    @NotNull(message =  "카테고리를 입력해주세요")
     private int categoryId;
 
     // getter, setter

@@ -22,9 +22,10 @@ public class ProductController {
 
     // 상품 개별 등록
     @PostMapping("/products")
-    public ResponseEntity<String> registerProduct(@RequestBody Product product) {
+    public ResponseEntity<String> registerProduct(@RequestBody ProductDTO productDTO) {
 //        System.out.println(Validator.isAlpha(product.getName()));
 //        System.out.println(Validator.isNumber(product.getPrice()));
+        Product product = productDTO.convertToEntity();
         if (Validator.isAlpha(product.getName()) && Validator.isNumber(product.getPrice())) {
             log.info("Product name is valid: " + product.getName());
             log.info("Product price is valid: " + product.getPrice());
