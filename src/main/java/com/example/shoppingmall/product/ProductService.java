@@ -14,7 +14,8 @@ public class ProductService {
         System.out.println(
                 "/products : service - " + product.getName());
 
-        return productRepository.save(product);
+//        return productRepository.save(product);
+        return productJPARepository.save(product);
     }
 
     public Product findProduct(int id) {

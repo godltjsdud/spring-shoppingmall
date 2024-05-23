@@ -22,22 +22,31 @@ public class ProductController {
 
     // 상품 개별 등록
     @PostMapping("/products")
-    public ResponseEntity registerProduct(@RequestBody Product product) {
-
-        if(Validator.isAlpha(product.getName()) &&
-                Validator.isNumber(product.getPrice())) {
-            log.info(product.getName());
+    public ResponseEntity<String> registerProduct(@RequestBody Product product) {
+//        System.out.println(Validator.isAlpha(product.getName()));
+//        System.out.println(Validator.isNumber(product.getPrice()));
+        if (Validator.isAlpha(product.getName()) && Validator.isNumber(product.getPrice())) {
+            log.info("Product name is valid: " + product.getName());
+            log.info("Product price is valid: " + product.getPrice());
 
             Product savedProduct = productService.registerProduct(product);
 
             try {
-                log.info(savedProduct.getName());
+                log.info("Saved product name: " + savedProduct.getName());
             } catch (NullPointerException e) {
+                log.error("Failed to log saved product name: ", e);
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
             return new ResponseEntity<>(HttpStatus.CREATED);
-        } else
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            if (!Validator.isAlpha(product.getName())) {
+                log.error("Invalid product name: " + product.getName());
+            }
+            if (!Validator.isNumber(product.getPrice())) {
+                log.error("Invalid product price: " + product.getPrice());
+            }
+            return new ResponseEntity<>("Invalid product data", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // 상품 개별 조회
